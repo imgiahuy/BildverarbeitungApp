@@ -1,0 +1,12 @@
+Eigenschaften : 
+
+multi-stage algorithm
+
+1. Noise Reduction
+2. Finding Intensity Gradient of the Image
+3. Non-maximum Suppression
+4. Hysteresis Thresholding : indicates whether all edges are really edges with minVal and maxVal
+
+- Any edges with intensity gradient more than maxVal are sure to be edges and those below minVal are sure to be non-edges, so discarded
+
+- Those who lie between these two thresholds are classified edges or non-edges based on their connectivity. If they are connected to "sure-edge" pixels, they are considered to be part of edges. Otherwise, they are also discarded.
