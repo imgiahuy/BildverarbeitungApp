@@ -1,5 +1,7 @@
 Diese Python Projekt ist ein kleines Tool, um Bilder zu bearbeiten. 
 
+gui.py ausführen um das Programm zu starten.
+
 Funktionen :
 
 - Bildhelligkeit erhöhen/reduzieren
