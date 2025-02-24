@@ -7,14 +7,14 @@ def grayscale(img):
     return cv.cvtColor(img, cv.COLOR_BGR2GRAY)
 
 
-def kreiserkennung(image):
+def kreiserkennung(image, minR, maxR):
     result = image
     gray = grayscale(image)
     img = cv.medianBlur(gray, 5)
 
     rows = img.shape[0]
 
-    circles = cv.HoughCircles(img, cv.HOUGH_GRADIENT, 1, rows / 8, param1=100, param2=30, minRadius=1, maxRadius=100)
+    circles = cv.HoughCircles(img, cv.HOUGH_GRADIENT, 1, rows / 8, param1=100, param2=30, minRadius=minR, maxRadius=maxR)
     if circles is not None:
         circles = np.uint16(np.around(circles))
         for i in circles[0, :]:

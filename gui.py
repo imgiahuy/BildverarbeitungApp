@@ -12,7 +12,7 @@ history_stack = []
 root = Tk()
 
 root.title("Bildverarbeitung")
-root.minsize(500, 500)
+root.minsize(600, 600)
 root.configure(background="#fff")
 
 #Vorschau bereich
@@ -20,7 +20,8 @@ img_label = Label(root, bg="lightgray", bd=5, relief=SUNKEN)
 examplePic = ImageTk.PhotoImage(Image.open("example.png"))
 img_label.config(image=examplePic)
 img_label.grid(column=0, row=0)
-
+minRadius = 1
+maxRadius = 100
 
 # Function
 def open_file():
@@ -68,7 +69,7 @@ def process_circle():
     global display_img
     if current_image is not None:
         history_stack.append(current_image.copy())
-        process_img = kreiserkennung(current_image)
+        process_img = kreiserkennung(current_image, minRadius, maxRadius)
         process_img_RGB = cv2.cvtColor(process_img, cv2.COLOR_BGR2RGB)
         display_img = Image.fromarray(process_img_RGB)
         image_tk = ImageTk.PhotoImage(display_img)
@@ -117,6 +118,19 @@ def undo():
     else:
         messagebox.showerror("Error", "Undo unmoeglich")
 
+def submit():
+    global minRadius, maxRadius
+    if (entry_min.get()) and (entry_max.get()):
+        minRadius = int(entry_min.get())
+        maxRadius = int(entry_max.get())
+
+def delete():
+    global minRadius, maxRadius
+    entry_min.delete(0, END)
+    entry_max.delete(0, END)
+    minRadius = 1
+    maxRadius = 100
+
 # Button
 button = Frame(root)
 Button(button, text="Bild Laden", command=open_file, width=15).grid(column=0, row=0)
@@ -127,8 +141,24 @@ Button(button, text="Kantenerkennung", command=process_kanten, width=15).grid(co
 Button(button, text="Helligkeit reduzieren", command=process_brightness_reduzieren, width=15).grid(column=1, row=1)
 Button(button,text="Undo", command=undo, width=15).grid(column=2, row=1)
 Button(button, text = "Exit", command=exit, width=15).grid(column=3, row=1)
-
 button.grid(column=0, row=1)
+
+# Label
+label = Frame(root)
+Label(label, text="Min Radius").grid(column=0, row=0)
+entry_min = Entry(label)
+entry_min.grid(column=1, row=0)
+
+Label(label, text="Max Radius").grid(column=0, row=1)
+entry_max = Entry(label)
+entry_max.grid(column=1, row=1)
+
+Button(label, text="Submit", command=submit, width=15).grid(column=2, row=0)
+
+Button(label, text="Delete", command=delete, width=15).grid(column=2, row=1)
+
+label.grid(column=0, row=2)
+
 
 root.resizable(width=0, height=0)
 root.mainloop()
