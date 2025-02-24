@@ -1,4 +1,6 @@
-Diese Python Projekt ist ein kleines Tool, um Bilder zu bearbeiten. Benutzung durch der Ausfuehrung der Datei gui.py 
+Diese Python Projekt ist ein kleines Tool, um Bilder zu bearbeiten. 
+
+gui.py ausführen um das Programm zu starten. Example Bilder sind unter Folder test_bild
 
 Funktionen :
 
@@ -18,4 +20,4 @@ Bei Hough Circle Algorithm habe ich OpenCV HoughCircle() Methode genutzt, da mit
 Mit dem HoughCircle() wir koennen das Ergebnis verbessern durch der Einstellung des maximal Radius Paramater in final_0.py
 
 GUI habe ich einfach mit Tkinter und PIL gebaut.
-Tkinter fuer GUI und PIL fuer bessere Integration zwischen OpenCV und Tkinter.
+Tkinter fuer GUI und PIL fuer bessere Integration zwischen OpenCV und Tkinter. 
